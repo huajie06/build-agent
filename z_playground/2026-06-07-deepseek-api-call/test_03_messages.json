@@ -1,0 +1,34 @@
+[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant with access to a calculator tool. Use it when the user asks for math calculations."
+    },
+    {
+        "role": "user",
+        "content": "What is (25 + 37) * 12?"
+    },
+    {
+        "content": "Let me calculate that step by step.",
+        "refusal": null,
+        "role": "assistant",
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+            {
+                "id": "call_00_3IhmJAkuyPSk0LxeJ6lk8700",
+                "function": {
+                    "arguments": "{\"expression\": \"(25 + 37) * 12\"}",
+                    "name": "calculator"
+                },
+                "type": "function",
+                "index": 0
+            }
+        ]
+    },
+    {
+        "role": "tool",
+        "content": "{\"result\": 744}",
+        "tool_call_id": "call_00_3IhmJAkuyPSk0LxeJ6lk8700"
+    }
+]
