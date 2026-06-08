@@ -1,0 +1,47 @@
+{
+    "id": "11b36839-cb9e-4671-bd3e-6fb61c03d6ef",
+    "choices": [
+        {
+            "finish_reason": "tool_calls",
+            "index": 0,
+            "logprobs": null,
+            "message": {
+                "content": "Let me calculate that step by step.",
+                "refusal": null,
+                "role": "assistant",
+                "annotations": null,
+                "audio": null,
+                "function_call": null,
+                "tool_calls": [
+                    {
+                        "id": "call_00_l9DcZm2y18ZMFHaAxGIR3366",
+                        "function": {
+                            "arguments": "{\"expression\": \"(25 + 37) * 12\"}",
+                            "name": "calculator"
+                        },
+                        "type": "function",
+                        "index": 0
+                    }
+                ]
+            }
+        }
+    ],
+    "created": 1780885482,
+    "model": "deepseek-v4-flash",
+    "object": "chat.completion",
+    "moderation": null,
+    "service_tier": null,
+    "system_fingerprint": "fp_8b330d02d0_prod0820_fp8_kvcache_20260402",
+    "usage": {
+        "completion_tokens": 58,
+        "prompt_tokens": 325,
+        "total_tokens": 383,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 325
+    }
+}
