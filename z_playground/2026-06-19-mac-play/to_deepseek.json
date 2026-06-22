@@ -1,0 +1,43 @@
+{
+    "id": "710f27fd-f236-4443-a496-94f6066e7173",
+    "object": "chat.completion",
+    "created": 1782072869,
+    "model": "deepseek-v4-flash",
+    "choices": [
+        {
+            "index": 0,
+            "message": {
+                "role": "assistant",
+                "content": "Sure, let me read that file for you!",
+                "reasoning_content": "Let me read the file abc.py from the current folder.",
+                "tool_calls": [
+                    {
+                        "index": 0,
+                        "id": "call_00_Ftc7pQA4zal8CBej5gvX0603",
+                        "type": "function",
+                        "function": {
+                            "name": "read_text_file",
+                            "arguments": "{\"path\": \"abc.py\"}"
+                        }
+                    }
+                ]
+            },
+            "logprobs": null,
+            "finish_reason": "tool_calls"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 400,
+        "completion_tokens": 67,
+        "total_tokens": 467,
+        "prompt_tokens_details": {
+            "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+            "reasoning_tokens": 12
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 400
+    },
+    "system_fingerprint": "fp_8b330d02d0_prod0820_fp8_kvcache_20260402"
+}
