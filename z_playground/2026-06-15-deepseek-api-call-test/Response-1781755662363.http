@@ -1,0 +1,60 @@
+HTTP/1.1 200 OK
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: close
+Date: Sun, 21 Jun 2026 18:00:27 GMT
+Server: elb
+Content-Encoding: gzip
+vary: origin, access-control-request-method, access-control-request-headers
+access-control-allow-credentials: true
+x-ds-trace-id: 09e75beac1a543ca525d4f94d03d4683
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+X-Cache: Miss from cloudfront
+Via: 1.1 15ee439a40f553006c5f4e91d483ab5e.cloudfront.net (CloudFront)
+X-Amz-Cf-Pop: BOS50-P3
+X-Amz-Cf-Id: 4PUMMQYestNPw-QxQ0_Yb95nwjtjFdh4gwdSdZDf_vc-L7ineQRZxw==
+
+{
+  "id": "022fea92-61d0-426b-b53f-9d8819443992",
+  "object": "chat.completion",
+  "created": 1782064827,
+  "model": "deepseek-v4-flash",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "reasoning_content": "The user wants to know the weather in New York City. I'll use the get_weather function to get this information.",
+        "tool_calls": [
+          {
+            "index": 0,
+            "id": "call_00_i4idqa98R0falHBgTVPY0254",
+            "type": "function",
+            "function": {
+              "name": "get_weather",
+              "arguments": "{\"location\": \"New York City, NY\"}"
+            }
+          }
+        ]
+      },
+      "logprobs": null,
+      "finish_reason": "tool_calls"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 309,
+    "completion_tokens": 74,
+    "total_tokens": 383,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 25
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 309
+  },
+  "system_fingerprint": "fp_8b330d02d0_prod0820_fp8_kvcache_20260402"
+}
