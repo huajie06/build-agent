@@ -1,0 +1,24 @@
+Summary of agent.py
+====================
+
+Purpose:
+Implements an agent loop that repeatedly calls a DeepSeek LLM, processes tool calls, and returns a final answer.
+
+Key Components:
+
+1. Imports
+   - call_DeepSeek from llm – to query the language model.
+   - tool_functions from tools – a dictionary of available tools.
+   - httpx & json – for HTTP requests and JSON handling.
+
+2. Function: run_agent(messages, max_loop_cnt=5)
+   - Takes a conversation history (messages) and a max iteration limit (default 5).
+   - Loop logic:
+     * Calls DeepSeek with the current messages.
+     * If finish_reason is "tool_calls" → appends the assistant message, iterates over each tool call, looks up the tool in tool_functions, executes it (with error handling for unknown tools or exceptions), and appends the result back into the message list with role "tool".
+     * If finish_reason is "stop" → prints any reasoning content and returns the assistant's final text.
+   - Error handling: Catches httpx.HTTPError (returns None) and unknown tools or execution errors (returns an error dict as the tool result).
+   - Safety limit: If the loop exceeds max_loop_cnt, it prints a message and returns None.
+
+In essence:
+It's a ReAct-style agent that lets the LLM decide which tools to call, executes them, feeds results back, and continues until it either gives a final answer or hits the iteration limit.
