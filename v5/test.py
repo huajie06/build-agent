@@ -58,13 +58,10 @@ def parse_message(data: dict) -> Message:
         raise ValueError(f"Unknown message role: {role}")
 
 
-data = json.loads(raw_messages)
-for d in data:
-    parsed_result = parse_message(d)
-    m.append(parsed_result)
-
-for i in m:
-    print(i.to_dict())
+# data = json.loads(raw_messages)
+# for d in data:
+#     parsed_result = parse_message(d)
+#     m.append(parsed_result)
 
 
 def save_session(data: list[Message], path: str):
@@ -79,4 +76,30 @@ def save_session(data: list[Message], path: str):
         print(f"An error has occured: {e}, session save filed")
 
 
-save_session(m, "./session/data.json")
+# save_session(m, "./session/data.json")
+
+
+def load_session(path: str):
+    p = Path(path)
+
+    try:
+        with p.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        return [parse_message(d) for d in data]
+
+    except Exception as e:
+        print(f"An error has occured: {e}, session load filed")
+
+
+session_data = load_session("./session/data.json")
+for s in session_data:
+    print(s)
+    print("-" * 20)
+
+# with open("./session/data.json") as f:
+#     data = json.load(f)
+
+# for d in data:
+#     if d.get("role") == "assistant":
+#         print(d)

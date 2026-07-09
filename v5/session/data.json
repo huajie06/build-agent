@@ -10,7 +10,7 @@
     {
         "role": "assistant",
         "content": "Here's a fun joke for you!",
-        "reasoning": "The user wants me to write a joke to a file called \"joke_01.txt\" in the current folder. Let me create a funny joke and write it to that file.",
+        "reasoning_content": "The user wants me to write a joke to a file called \"joke_01.txt\" in the current folder. Let me create a funny joke and write it to that file.",
         "tool_calls": [
             {
                 "index": 0,
@@ -33,7 +33,7 @@
     {
         "role": "assistant",
         "content": "Done! I've written a joke to **joke_01.txt** in your current folder. Here's what's inside:\n\n> Why don't scientists trust atoms?\n> \n> Because they make up everything! \ud83d\ude04\n\nFeel free to open it anytime for a quick laugh!",
-        "reasoning": null,
+        "reasoning_content": null,
         "tool_calls": null,
         "finish_reason": null
     }

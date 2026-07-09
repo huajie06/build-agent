@@ -30,7 +30,7 @@ class UserMessage:
 class AssistantMessage:
     role: Literal["assistant"]
     content: str | None = None
-    reasoning_content: str | None = None
+    reasoning: str | None = None
     tool_calls: list[dict] | None = None
     finish_reason: str | None = None
 
@@ -38,7 +38,7 @@ class AssistantMessage:
         return {
             "role": self.role,
             "content": self.content,
-            "reasoning": self.reasoning_content,
+            "reasoning": self.reasoning,
             "tool_calls": self.tool_calls,
             "finish_reason": self.finish_reason,
         }
