@@ -1,9 +1,13 @@
-from Pathlib import Path
+from pathlib import Path
 from models import Message, SystemMessage, UserMessage, AssistantMessage, ToolMessage
 import json
 
 
 def parse_message(data: dict) -> Message:
+    """process for internal data model `Message`
+
+    Note: deepseek use reasoning_content instead reasoning
+    """
     role = data.get("role")
 
     if role == "system":

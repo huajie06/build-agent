@@ -1,6 +1,6 @@
 from models import Message, SystemMessage, UserMessage, AssistantMessage, ToolMessage
 import json
-from pathlib import Path
+from session import save_session, load_session
 
 raw_messages = r"""
 [
@@ -15,7 +15,7 @@ raw_messages = r"""
     {
         "role": "assistant",
         "content": "Here's a fun joke for you!",
-        "reasoning_content": "The user wants me to write a joke to a file called \"joke_01.txt\" in the current folder. Let me create a funny joke and write it to that file.",
+        "reasoning": "The user wants me to write a joke to a file called \"joke_01.txt\" in the current folder. Let me create a funny joke and write it to that file.",
         "tool_calls": [
             {
                 "index": 0,
@@ -63,34 +63,7 @@ def parse_message(data: dict) -> Message:
 #     parsed_result = parse_message(d)
 #     m.append(parsed_result)
 
-
-def save_session(data: list[Message], path: str):
-    p = Path(path)
-    try:
-        p.parent.mkdir(parents=True, exist_ok=True)
-
-        with p.open("w", encoding="utf-8") as f:
-            json.dump([d.to_dict() for d in data], f, indent=4)
-
-    except Exception as e:
-        print(f"An error has occured: {e}, session save filed")
-
-
 # save_session(m, "./session/data.json")
-
-
-def load_session(path: str):
-    p = Path(path)
-
-    try:
-        with p.open("r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        return [parse_message(d) for d in data]
-
-    except Exception as e:
-        print(f"An error has occured: {e}, session load filed")
-
 
 session_data = load_session("./session/data.json")
 for s in session_data:

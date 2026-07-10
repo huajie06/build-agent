@@ -1,0 +1,32 @@
+{
+  "id": "ec53196d-7588-4205-9ba4-e447672c09c8",
+  "object": "chat.completion",
+  "created": 1783653307,
+  "model": "deepseek-v4-flash",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hi there! How can I help you today?",
+        "reasoning_content": "We need to respond to the user's simple greeting \"Hi\". The assistant should be friendly and offer help. Since the user didn't ask a specific question, we can just respond with a greeting and an offer to assist."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 10,
+    "completion_tokens": 56,
+    "total_tokens": 66,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 45
+    },
+    "prompt_cache_hit_tokens": 0,
+    "prompt_cache_miss_tokens": 10
+  },
+  "system_fingerprint": "fp_8b330d02d0_prod0820_fp8_kvcache_20260402"
+}

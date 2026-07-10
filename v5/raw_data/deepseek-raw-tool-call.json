@@ -1,0 +1,43 @@
+{
+   "id":"ecd242de-e8c9-47ca-b524-ee0767a9cd54",
+   "object":"chat.completion",
+   "created":1783654478,
+   "model":"deepseek-v4-flash",
+   "choices":[
+      {
+         "index":0,
+         "message":{
+            "role":"assistant",
+            "content":"",
+            "reasoning_content":"The user wants me to read a file called \"agent.py\" at the current path. Let me use the read_text_file tool.",
+            "tool_calls":[
+               {
+                  "index":0,
+                  "id":"call_00_g4bs2C1tMZVLDYhjSwt04298",
+                  "type":"function",
+                  "function":{
+                     "name":"read_text_file",
+                     "arguments":"{\"path\": \"agent.py\"}"
+                  }
+               }
+            ]
+         },
+         "logprobs":"None",
+         "finish_reason":"tool_calls"
+      }
+   ],
+   "usage":{
+      "prompt_tokens":396,
+      "completion_tokens":73,
+      "total_tokens":469,
+      "prompt_tokens_details":{
+         "cached_tokens":0
+      },
+      "completion_tokens_details":{
+         "reasoning_tokens":27
+      },
+      "prompt_cache_hit_tokens":0,
+      "prompt_cache_miss_tokens":396
+   },
+   "system_fingerprint":"fp_8b330d02d0_prod0820_fp8_kvcache_20260402"
+}
