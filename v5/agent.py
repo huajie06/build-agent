@@ -4,7 +4,7 @@ from tools import TOOL_FUNCTIONS
 import json
 
 
-def run_agent(messages: list[Message], max_loop_cnt=5) -> str | None:
+def run_agent(messages: list[Message], max_loop_cnt=3):
 
     loop_cnt = 0
 
@@ -16,7 +16,7 @@ def run_agent(messages: list[Message], max_loop_cnt=5) -> str | None:
         try:
             assistant_msg_result = call_llm(messages)
         except Exception as e:
-            print(f"call LLM API failed due to {e}")
+            print(f"call_llm() failed due to {e}")
             return None
 
         loop_cnt += 1
@@ -59,4 +59,4 @@ def run_agent(messages: list[Message], max_loop_cnt=5) -> str | None:
             print("[REASONING]")
             print(assistant_msg_result.reasoning)
             print("-" * 50)
-            return assistant_msg_result.content
+            return assistant_msg_result

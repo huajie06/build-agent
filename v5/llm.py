@@ -34,5 +34,6 @@ def call_llm(messages: list[Message]) -> AssistantMessage:
     response.raise_for_status()
 
     data = response.json()
-    choice = data["choice"][0]
+    choice = data["choices"][0]
+
     return from_deepseek_assistant_message(choice)
