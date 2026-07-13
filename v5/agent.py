@@ -44,14 +44,13 @@ def run_agent(messages: list[Message], max_loop_cnt=3):
                         func_result = function(**args)
                     except Exception as e:
                         func_result = {"error": str(e)}
+                        print(f"function {function} error: {func_result}")
 
                 messages.append(
                     ToolMessage(
                         role="tool",
                         tool_call_id=tool_call_id,
-                        content=json.dumps(
-                            {"result": func_result}, ensure_ascill=False
-                        ),
+                        content=json.dumps({"result": func_result}, ensure_ascii=False),
                     )
                 )
 
