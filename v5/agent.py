@@ -30,7 +30,7 @@ def run_agent(messages: list[Message], max_loop_cnt=3):
                 function_data = tool_call["function"]
 
                 tool_name = function_data["name"]
-                args = function_data["arguments"]
+                args = json.loads(function_data["arguments"])
 
                 print(f"[Tool requested: {tool_name}]")
                 print(f"[Arguments: {args}]")
