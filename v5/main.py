@@ -3,6 +3,8 @@ from agent import run_agent
 from session import load_session, save_session
 from models import SystemMessage, UserMessage
 
+INITIAL_MESSAGE = SystemMessage(role="system", content="you are a helpful agent")
+
 
 def cli_loop():
     current_dir = Path(__file__).resolve().parent
@@ -14,7 +16,7 @@ def cli_loop():
         messages = None
 
     if messages is None:
-        messages = [SystemMessage(role="system", content="you are a helpful agent")]
+        messages = [INITIAL_MESSAGE]
 
     while True:
         user_input = input("> ").strip()
