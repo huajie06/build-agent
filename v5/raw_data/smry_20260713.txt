@@ -1,0 +1,35 @@
+Summary of tools.py
+====================
+
+This module implements a custom tool registration system where functions can 
+be decorated with @tool(...) to automatically register themselves into two 
+global registries.
+
+Key Components
+---------------
+
+1. Global Registries
+   - TOOL_FUNCTIONS: maps tool names to their actual callable functions.
+   - DEEPSEEK_TOOLS: stores metadata dictionaries (name, description, 
+     parameter schema) formatted for API use.
+
+2. @tool() Decorator
+   A decorator factory that accepts a name, description, and parameters 
+   (JSON Schema). It registers the decorated function in both registries 
+   above.
+
+3. Registered Tools
+
+   - read_text_file(path)
+     Reads and returns UTF-8 text file content. Validates the file exists 
+     and is a file.
+
+   - write_text_file(path, content)
+     Writes text to a file (overwrites existing). Auto-creates parent 
+     directories. Returns a confirmation message.
+
+Design Highlights
+------------------
+- Easily extensible — just add a new @tool(...) decorated function.
+- Clean separation between function logic and metadata.
+- Ready for API integration (e.g., DeepSeek function calling).

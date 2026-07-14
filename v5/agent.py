@@ -22,6 +22,11 @@ def run_agent(messages: list[Message], max_loop_cnt=3):
         loop_cnt += 1
 
         if assistant_msg_result.finish_reason == "tool_calls":
+            # FIXED: if a reponse fail to provide actual `tool_calls`
+            if not assistant_msg_result.tool_calls:
+                print("provider returned tool_calls finish reason without tool calls")
+                return None
+
             messages.append(assistant_msg_result)
 
             tool_calls = assistant_msg_result.tool_calls
@@ -30,17 +35,14 @@ def run_agent(messages: list[Message], max_loop_cnt=3):
                 function_data = tool_call["function"]
 
                 tool_name = function_data["name"]
-                args = json.loads(function_data["arguments"])
-
-                print(f"[Tool requested: {tool_name}]")
-                print(f"[Arguments: {args}]")
-
                 function = TOOL_FUNCTIONS.get(tool_name)
 
                 if function is None:
                     func_result = {"error": f"unknown tool requested: {tool_name}"}
                 else:
                     try:
+                        # FIXED: if model supplies invalid JSON
+                        args = json.loads(function_data["arguments"])
                         func_result = function(**args)
                     except Exception as e:
                         func_result = {"error": str(e)}
@@ -53,9 +55,15 @@ def run_agent(messages: list[Message], max_loop_cnt=3):
                         content=json.dumps({"result": func_result}, ensure_ascii=False),
                     )
                 )
+            continue
 
-        if assistant_msg_result.finish_reason == "stop":
+        elif assistant_msg_result.finish_reason == "stop":
             print("[REASONING]")
             print(assistant_msg_result.reasoning)
             print("-" * 50)
             return assistant_msg_result
+
+        else:
+            print(f"Unsupported finish reason: {assistant_msg_result.finish_reason}")
+            # FIXED: add None return
+            return None

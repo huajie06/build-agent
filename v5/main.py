@@ -11,7 +11,7 @@ def cli_loop():
     session_file = current_dir / "session" / "session.json"
 
     if session_file.is_file():
-        messages = load_session(str(session_file))
+        messages = load_session(session_file)
     else:
         messages = None
 
@@ -22,7 +22,7 @@ def cli_loop():
         user_input = input("> ").strip()
 
         if user_input.lower() == "/exit":
-            save_session(data=messages, path=str(session_file))
+            save_session(data=messages, path=session_file)
             print("bye")
             break
 

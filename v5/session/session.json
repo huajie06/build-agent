@@ -165,5 +165,84 @@
         "reasoning": "The file was saved successfully.",
         "tool_calls": null,
         "finish_reason": "stop"
+    },
+    {
+        "role": "user",
+        "content": "hi!"
+    },
+    {
+        "role": "assistant",
+        "content": "Hi again! \ud83d\ude0a \n\nIs there anything else you'd like me to do? Maybe:\n\n- Check if the summary file was saved correctly?\n- Edit or expand the summary?\n- Help you with anything else in your project?\n\nLet me know how I can assist!",
+        "reasoning": "The user is just greeting me. Let me respond warmly.",
+        "tool_calls": null,
+        "finish_reason": "stop"
+    },
+    {
+        "role": "user",
+        "content": "read my tools.py at current folder, summarize it for me"
+    },
+    {
+        "role": "assistant",
+        "content": "Sure, let me read it!",
+        "reasoning": "The user wants me to read tools.py and summarize it. I already have the content from earlier, but let me read it again to be sure.",
+        "tool_calls": [
+            {
+                "index": 0,
+                "id": "call_00_9CHBrt6hccQl5S95BwF88870",
+                "type": "function",
+                "function": {
+                    "name": "read_text_file",
+                    "arguments": "{\"path\": \"tools.py\"}"
+                }
+            }
+        ],
+        "finish_reason": "tool_calls"
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_00_9CHBrt6hccQl5S95BwF88870",
+        "content": "{\"result\": \"from pathlib import Path\\nfrom typing import Any, Callable\\n\\nTOOL_FUNCTIONS: dict[str, Callable[..., Any]] = {}\\nDEEPSEEK_TOOLS: list[dict[str, Any]] = []\\n\\n\\ndef tool(name: str, description: str, parameters: dict[str, Any]):\\n    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:\\n        TOOL_FUNCTIONS[name] = func\\n\\n        DEEPSEEK_TOOLS.append(\\n            {\\n                \\\"type\\\": \\\"function\\\",\\n                \\\"function\\\": {\\n                    \\\"name\\\": name,\\n                    \\\"description\\\": description,\\n                    \\\"parameters\\\": parameters,\\n                },\\n            }\\n        )\\n\\n        return func\\n\\n    return decorator\\n\\n\\n@tool(\\n    name=\\\"read_text_file\\\",\\n    description=\\\"Read and return the contents of a UTF-8 text file.\\\",\\n    parameters={\\n        \\\"type\\\": \\\"object\\\",\\n        \\\"properties\\\": {\\n            \\\"path\\\": {\\n                \\\"type\\\": \\\"string\\\",\\n                \\\"description\\\": \\\"Path to the text file.\\\",\\n            }\\n        },\\n        \\\"required\\\": [\\\"path\\\"],\\n        \\\"additionalProperties\\\": False,\\n    },\\n)\\ndef read_text_file(path: str) -> str:\\n    file_path = Path(path)\\n\\n    if not file_path.exists():\\n        raise FileNotFoundError(f\\\"File does not exist: {path}\\\")\\n\\n    if not file_path.is_file():\\n        raise ValueError(f\\\"Path is not a file: {path}\\\")\\n\\n    return file_path.read_text(encoding=\\\"utf-8\\\")\\n\\n\\n@tool(\\n    name=\\\"write_text_file\\\",\\n    description=\\\"Write UTF-8 text to a file, replacing existing content.\\\",\\n    parameters={\\n        \\\"type\\\": \\\"object\\\",\\n        \\\"properties\\\": {\\n            \\\"path\\\": {\\n                \\\"type\\\": \\\"string\\\",\\n                \\\"description\\\": \\\"Destination file path.\\\",\\n            },\\n            \\\"content\\\": {\\n                \\\"type\\\": \\\"string\\\",\\n                \\\"description\\\": \\\"Text to write.\\\",\\n            },\\n        },\\n        \\\"required\\\": [\\\"path\\\", \\\"content\\\"],\\n        \\\"additionalProperties\\\": False,\\n    },\\n)\\ndef write_text_file(path: str, content: str) -> str:\\n    file_path = Path(path)\\n\\n    file_path.parent.mkdir(parents=True, exist_ok=True)\\n    file_path.write_text(content, encoding=\\\"utf-8\\\")\\n\\n    return f\\\"Wrote {len(content)} characters to {path}\\\"\\n\"}",
+        "name": null
+    },
+    {
+        "role": "assistant",
+        "content": "Here's a summary of your **tools.py**:\n\n---\n\n### \ud83d\udce6 What it does\nThis module implements a **custom tool registration system** where functions can be decorated with `@tool(...)` to automatically register themselves into two global registries.\n\n---\n\n### \ud83e\udde9 Key Components\n\n**1. Global Registries**\n- `TOOL_FUNCTIONS` \u2014 maps tool names to their actual callable functions.\n- `DEEPSEEK_TOOLS` \u2014 stores metadata dictionaries (name, description, parameter schema) formatted for API use.\n\n**2. `@tool()` Decorator**\nA decorator factory that accepts a **name**, **description**, and **parameters** (JSON Schema). It registers the decorated function in both registries above.\n\n**3. Registered Tools**\n\n| Tool | Description |\n|------|-------------|\n| `read_text_file(path)` | Reads & returns UTF-8 text file content. Validates the file exists and is a file. |\n| `write_text_file(path, content)` | Writes text to a file (overwrites existing). Auto-creates parent directories. Returns a confirmation message. |\n\n---\n\n### \u2728 Design Highlights\n- **Easily extensible** \u2014 just add a new `@tool(...)` decorated function.\n- **Clean separation** between function logic and metadata.\n- **Ready for API integration** (e.g., DeepSeek function calling).\n\nWould you like me to save this summary to a file again, or make any changes?",
+        "reasoning": "The user wants me to summarize it for them. I already have the content, let me provide a concise summary.",
+        "tool_calls": null,
+        "finish_reason": "stop"
+    },
+    {
+        "role": "user",
+        "content": "yeah, save this summary to my raw_data folder and call it 'smry_20260713.txt'"
+    },
+    {
+        "role": "assistant",
+        "content": "Sure! Let me save it now.",
+        "reasoning": "The user wants me to save the summary I just provided to ./raw_data/smry_20260713.txt.",
+        "tool_calls": [
+            {
+                "index": 0,
+                "id": "call_00_J0SO3ImwiJt91hcp9z9e2462",
+                "type": "function",
+                "function": {
+                    "name": "write_text_file",
+                    "arguments": "{\"path\": \"./raw_data/smry_20260713.txt\", \"content\": \"Summary of tools.py\\n====================\\n\\nThis module implements a custom tool registration system where functions can \\nbe decorated with @tool(...) to automatically register themselves into two \\nglobal registries.\\n\\nKey Components\\n---------------\\n\\n1. Global Registries\\n   - TOOL_FUNCTIONS: maps tool names to their actual callable functions.\\n   - DEEPSEEK_TOOLS: stores metadata dictionaries (name, description, \\n     parameter schema) formatted for API use.\\n\\n2. @tool() Decorator\\n   A decorator factory that accepts a name, description, and parameters \\n   (JSON Schema). It registers the decorated function in both registries \\n   above.\\n\\n3. Registered Tools\\n\\n   - read_text_file(path)\\n     Reads and returns UTF-8 text file content. Validates the file exists \\n     and is a file.\\n\\n   - write_text_file(path, content)\\n     Writes text to a file (overwrites existing). Auto-creates parent \\n     directories. Returns a confirmation message.\\n\\nDesign Highlights\\n------------------\\n- Easily extensible \u2014 just add a new @tool(...) decorated function.\\n- Clean separation between function logic and metadata.\\n- Ready for API integration (e.g., DeepSeek function calling).\\n\"}"
+                }
+            }
+        ],
+        "finish_reason": "tool_calls"
+    },
+    {
+        "role": "tool",
+        "tool_call_id": "call_00_J0SO3ImwiJt91hcp9z9e2462",
+        "content": "{\"result\": \"Wrote 1164 characters to ./raw_data/smry_20260713.txt\"}",
+        "name": null
+    },
+    {
+        "role": "assistant",
+        "content": "Done! \u2705 The summary has been saved to **`./raw_data/smry_20260713.txt`** (1,164 characters).\n\nLet me know if you need anything else! \ud83d\ude0a",
+        "reasoning": "The file was saved successfully.",
+        "tool_calls": null,
+        "finish_reason": "stop"
     }
 ]
