@@ -1,0 +1,33 @@
+[
+   {
+      "role":"system",
+      "content":"you are a helpful agent"
+   },
+   {
+      "role":"user",
+      "content":"tell me a joke and then save it at my current folder: joke.txt"
+   },
+   {
+      "role":"assistant",
+      "content":"Sure! Let me first find a good joke for you.\n\nHere's a classic one:\n\n**Why don't scientists trust atoms?**  \nBecause they make up everything! 😄\n\nNow, let me save it to `joke.txt` in the current folder.",
+      "reasoning_content":"Let me find a good joke and then save it to joke.txt in the current folder.",
+      "tool_calls":[
+         {
+            "id":"call_00_UIPL2qrSILc1qZj9sjAW3665",
+            "type":"function",
+            "function":{
+               "name":"write_text_file",
+               "arguments":{
+                  "path":"joke.txt",
+                  "content":"Why don't scientists trust atoms? Because they make up everything!"
+               }
+            }
+         }
+      ]
+   },
+   {
+      "role":"tool",
+      "tool_call_id":"call_00_UIPL2qrSILc1qZj9sjAW3665",
+      "content":"{\"result\": \"Wrote 66 characters to joke.txt\"}"
+   }
+]
